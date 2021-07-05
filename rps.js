@@ -1,6 +1,4 @@
 function computerPlay() {
-    let options = ['Rock', 'Paper', 'Scissors'];
-    return Math.floor(Math.random() * options.length);
+    let plays = ['Rock', 'Paper', 'Scissors'];
+    return plays[Math.floor(Math.random() * plays.length)];
 }
-
-console.log(computerPlay());
