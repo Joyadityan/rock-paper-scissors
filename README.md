@@ -1,1 +1,1 @@
-# rock-paper-scissors
+Rock Paper Scissors game for the Full Stack JavaScript curriculum on The Odin Project.
