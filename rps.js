@@ -46,12 +46,14 @@ function game() {
         }
         console.log('\n')
     }
+
+    const finalScore = `Final Score: You [${playerScore} - ${computerScore}] Computer`;
     if (playerScore > computerScore) {
-        return "You win!";
+        console.log(`You win!\n${finalScore}`);
     } else if (computerScore > playerScore) {
-        return "You lose!";
+        console.log(`You lose!\n${finalScore}`);
     } else {
-        return "It's a draw!";
+        console.log(`It's a draw!\n${finalScore}`);
     }
 }
 
