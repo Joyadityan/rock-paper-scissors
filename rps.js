@@ -34,10 +34,10 @@ function game() {
         console.log(`[Round ${round}]`);
 
         result = playRound(playerSelection, computerSelection);
-        if (result == '0') {
+        if (result === '0') {
             console.log(`Tie! Both played ${playerSelection}.`);
             console.log(`Score: ${playerScore} - ${computerScore}`);
-        } else if (result == '1') {
+        } else if (result === '1') {
             console.log(`You win! ${playerSelection} beats ${computerSelection}.`);
             console.log(`Score: ${++playerScore} - ${computerScore}`);
         } else {
