@@ -66,6 +66,7 @@ function startGame(playerChoice) {
 let score = [0, 0];
 let roundCount = 0;
 const keys = document.querySelectorAll('.key');
+
 keys.forEach((key) => {
     key.addEventListener('click', () => {
         startGame(key.id);
