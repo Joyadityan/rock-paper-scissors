@@ -19,53 +19,55 @@ function playRound(ps, cs) {
     }
 }
 
-function startGame(playerSelection) {
-    let computerSelection;
-    let score = [0, 0];
-    // let playerScore = 0;
-    // let computerScore = 0;
-    let result;
-    let gameLog;
-    computerSelection = computerPlay();
-
-    playerSelection =
-        playerSelection.charAt(0).toUpperCase() +
-        playerSelection.substring(1, playerSelection.length).toLowerCase();
-
-    const container = document.querySelector('#main');
-    gameLog = document.querySelector('.log');
-
-    result = playRound(playerSelection, computerSelection);
-    if (result === '0') {
-        gameLog.textContent = `
-            Tie! Both played ${playerSelection}.
-            \nScore: ${score[0]} - ${score[1]}`;
-    } else if (result === '1') {
-        gameLog.textContent = `
-            You win! ${playerSelection} beats ${computerSelection}.
-            Score: ${++score[0]} - ${score[1]}`;
-    } else {
-        gameLog.textContent = `
-            You lose! ${computerSelection} beats ${playerSelection}.
-            Score: ${score[0]} - ${++score[1]}`;
+function startGame(playerChoice) {
+    if (roundCount === 5) {
+        roundCount = 0;
+        score = [0, 0];
     }
-    console.log('\n');
 
-    const finalScore = `Final Score: You [${score[0]} - ${score[1]}] Computer`;
-    if (score[0] > score[1]) {
-        console.log(`You win!\n${finalScore}`);
-    } else if (computerScore > playerScore) {
-        console.log(`You lose!\n${finalScore}`);
+    let computerChoice;
+    let result;
+
+    computerChoice = computerPlay();
+    playerChoice =
+        playerChoice.charAt(0).toUpperCase() +
+        playerChoice.substring(1, playerChoice.length).toLowerCase();
+
+    const gameLog = document.querySelector('.log');
+    const gameScore = document.querySelector('.game-score');
+
+    result = playRound(playerChoice, computerChoice);
+    if (result === '0') {
+        gameLog.textContent = `Tie! Both played ${playerChoice}.`;
+        gameScore.textContent = `Score: ${score[0]} - ${score[1]}`;
+    } else if (result === '1') {
+        gameLog.textContent = `You win! ${playerChoice} beats ${computerChoice}.`;
+        gameScore.textContent = `Score: ${++score[0]} - ${score[1]}`;
     } else {
-        console.log(`It's a draw!\n${finalScore}`);
+        gameLog.textContent = `You lose! ${computerChoice} beats ${playerChoice}.`;
+        gameScore.textContent = `Score: ${score[0]} - ${++score[1]}`;
+    }
+
+    console.log(roundCount + 'before');
+    if (++roundCount === 5) {
+        console.log(roundCount + 'after');
+        const finalScore = `Final Score: You [${score[0]} - ${score[1]}] Computer`;
+        if (score[0] > score[1]) {
+            gameLog.textContent = `You win!`;
+        } else if (score[1] > score[0]) {
+            gameLog.textContent = `You lose!`;
+        } else {
+            gameLog.textContent = `It's a draw!`;
+        }
+        gameScore.textContent = finalScore;
     }
 }
 
+let score = [0, 0];
+let roundCount = 0;
 const keys = document.querySelectorAll('.key');
 keys.forEach((key) => {
-    // and for each one we add a 'click' listener
     key.addEventListener('click', () => {
-        console.log(key.id);
         startGame(key.id);
     });
 });
