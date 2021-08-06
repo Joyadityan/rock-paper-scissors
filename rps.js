@@ -20,9 +20,16 @@ function playRound(ps, cs) {
 }
 
 function startGame(playerChoice) {
+    const scoreUIGroup = document.querySelectorAll('.score-ui');
+
     if (roundCount === 5) {
-        roundCount = 0;
+        roundCount = 1;
         score = [0, 0];
+        scoreUIGroup.forEach((element) => {
+            element.style.backgroundColor = 'gray';
+        });
+    } else {
+        roundCount++;
     }
 
     let computerChoice;
@@ -35,22 +42,24 @@ function startGame(playerChoice) {
 
     const gameLog = document.querySelector('.log');
     const gameScore = document.querySelector('.game-score');
+    const scoreUI = document.querySelector(`#round-${roundCount}`);
 
     result = playRound(playerChoice, computerChoice);
     if (result === '0') {
         gameLog.textContent = `Tie! Both played ${playerChoice}.`;
         gameScore.textContent = `Score: ${score[0]} - ${score[1]}`;
+        scoreUI.style.backgroundColor = '#f2f237';
     } else if (result === '1') {
         gameLog.textContent = `You win! ${playerChoice} beats ${computerChoice}.`;
         gameScore.textContent = `Score: ${++score[0]} - ${score[1]}`;
+        scoreUI.style.backgroundColor = '#47c847';
     } else {
         gameLog.textContent = `You lose! ${computerChoice} beats ${playerChoice}.`;
         gameScore.textContent = `Score: ${score[0]} - ${++score[1]}`;
+        scoreUI.style.backgroundColor = '#a21d1d';
     }
 
-    console.log(roundCount + 'before');
-    if (++roundCount === 5) {
-        console.log(roundCount + 'after');
+    if (roundCount === 5) {
         const finalScore = `Final Score: You [${score[0]} - ${score[1]}] Computer`;
         if (score[0] > score[1]) {
             gameLog.textContent = `You win!`;

@@ -4,7 +4,13 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Rock Paper Scissors</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
         <link rel="stylesheet" href="style.css" />
         <script src="rps.js" defer></script>
     </head>
@@ -14,11 +20,18 @@
             <h1>Rock Paper Scissors</h1>
 
             <div class="container keys">
-                <div id="rock" data-key="r" class="key"></div>
-                <div id="paper" data-key="p" class="key"></div>
-                <div id="scissors" data-key="s" class="key"></div>
+                <div id="rock" class="key"></div>
+                <div id="paper" class="key"></div>
+                <div id="scissors" class="key"></div>
             </div>
 
+            <div class="score-ui-container">
+                <div id="round-1" class="score-ui"></div>
+                <div id="round-2" class="score-ui"></div>
+                <div id="round-3" class="score-ui"></div>
+                <div id="round-4" class="score-ui"></div>
+                <div id="round-5" class="score-ui"></div>
+            </div>
             <div class="log"></div>
             <div class="game-score"></div>
         </main>
