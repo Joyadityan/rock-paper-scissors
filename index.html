@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="style.css" />
+        <script src="rps.js" defer></script>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <body>
+        <main id="main">
+            <header class="container">
+                <h1>Rock Paper Scissors</h1>
+            </header>
 
-<body>
-    <script src="rps.js"></script>
-</body>
+            <div class="container keys">
+                <div id="rock" data-key="r" class="key">
+                    <kbd>R</kbd>
+                    <span>Rock</span>
+                </div>
+                <div id="paper" data-key="p" class="key">
+                    <kbd>P</kbd>
+                    <span>Paper</span>
+                </div>
+                <div id="scissors" data-key="s" class="key">
+                    <kbd>S</kbd>
+                    <span>Scissors</span>
+                </div>
+            </div>
 
+            <div class="container log"></div>
+        </main>
+    </body>
 </html>
