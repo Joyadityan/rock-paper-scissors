@@ -19,56 +19,94 @@ function playRound(ps, cs) {
     }
 }
 
+function setImage(player, computer) {
+    const choice = document.querySelectorAll('.choice');
+
+    choice.forEach((element) => {
+        element.textContent = '';
+        element.classList.remove(element.classList[1]);
+    });
+
+    if (player === 'Rock') {
+        choice[0].style.transform = 'scaleX(-1)';
+    } else {
+        choice[0].style.transform = 'scaleX(1)';
+    }
+
+    if (computer === 'Rock') {
+        choice[1].style.transform = 'scaleX(1)';
+    } else {
+        choice[1].style.transform = 'scaleX(-1)';
+    }
+
+    choice[0].classList.add(`${player.toLowerCase()}`);
+    choice[1].classList.add(`${computer.toLowerCase()}`);
+}
+
 function startGame(playerChoice) {
-    const scoreUIGroup = document.querySelectorAll('.score-ui');
+    const roundUIContainer = document.querySelectorAll('.round-ui');
+    const currentRound = document.querySelector('#current-round');
+    const playerImg = document.querySelectorAll('.player');
+    const finalResult = document.querySelector('.final-result');
 
     if (roundCount === 5) {
         roundCount = 1;
         score = [0, 0];
-        scoreUIGroup.forEach((element) => {
+        roundUIContainer.forEach((element) => {
             element.style.backgroundColor = 'gray';
         });
+        playerImg.forEach((element) => {
+            element.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+        });
+        finalResult.textContent = '';
     } else {
         roundCount++;
     }
 
-    let computerChoice;
-    let result;
+    currentRound.textContent = `round ${roundCount}`;
 
-    computerChoice = computerPlay();
+    const gameLog = document.querySelector('.log');
+    const roundUI = document.querySelector(`#round-${roundCount}`);
+    const scoreCounter = document.querySelectorAll(`.score`);
+
     playerChoice =
         playerChoice.charAt(0).toUpperCase() +
         playerChoice.substring(1, playerChoice.length).toLowerCase();
 
-    const gameLog = document.querySelector('.log');
-    const gameScore = document.querySelector('.game-score');
-    const scoreUI = document.querySelector(`#round-${roundCount}`);
+    let computerChoice = computerPlay();
+    let result = playRound(playerChoice, computerChoice);
+    setImage(playerChoice, computerChoice);
 
-    result = playRound(playerChoice, computerChoice);
     if (result === '0') {
         gameLog.textContent = `Tie! Both played ${playerChoice}.`;
-        gameScore.textContent = `Score: ${score[0]} - ${score[1]}`;
-        scoreUI.style.backgroundColor = '#f2f237';
+        scoreCounter[0].textContent = score[0];
+        scoreCounter[1].textContent = score[1];
+        roundUI.style.backgroundColor = '#f2f237';
     } else if (result === '1') {
         gameLog.textContent = `You win! ${playerChoice} beats ${computerChoice}.`;
-        gameScore.textContent = `Score: ${++score[0]} - ${score[1]}`;
-        scoreUI.style.backgroundColor = '#47c847';
+        scoreCounter[0].textContent = ++score[0];
+        scoreCounter[1].textContent = score[1];
+        roundUI.style.backgroundColor = '#47c847';
     } else {
         gameLog.textContent = `You lose! ${computerChoice} beats ${playerChoice}.`;
-        gameScore.textContent = `Score: ${score[0]} - ${++score[1]}`;
-        scoreUI.style.backgroundColor = '#a21d1d';
+        scoreCounter[0].textContent = score[0];
+        scoreCounter[1].textContent = ++score[1];
+        roundUI.style.backgroundColor = '#a21d1d';
     }
 
     if (roundCount === 5) {
-        const finalScore = `Final Score: You [${score[0]} - ${score[1]}] Computer`;
         if (score[0] > score[1]) {
-            gameLog.textContent = `You win!`;
+            playerImg[0].style.backgroundColor = 'rgba(43, 136, 0, 0.6)';
+            finalResult.textContent = `Final Result: You Win!`;
         } else if (score[1] > score[0]) {
-            gameLog.textContent = `You lose!`;
+            playerImg[1].style.backgroundColor = 'rgba(43, 136, 0, 0.6)';
+            finalResult.textContent = `Final Result: You Lose!`;
         } else {
-            gameLog.textContent = `It's a draw!`;
+            finalResult.textContent = `Final Result: Tie!`;
+            playerImg.forEach((element) => {
+                element.style.backgroundColor = 'rgba(189, 124, 39, 0.6)';
+            });
         }
-        gameScore.textContent = finalScore;
     }
 }
 
@@ -78,6 +116,6 @@ const keys = document.querySelectorAll('.key');
 
 keys.forEach((key) => {
     key.addEventListener('click', () => {
-        startGame(key.id);
+        startGame(key.classList[1]);
     });
 });
