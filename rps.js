@@ -112,10 +112,10 @@ function startGame(playerChoice) {
 
 let score = [0, 0];
 let roundCount = 0;
-const keys = document.querySelectorAll('.key');
+const buttons = document.querySelectorAll('.btn');
 
-keys.forEach((key) => {
-    key.addEventListener('click', () => {
-        startGame(key.classList[1]);
+buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        startGame(btn.classList[1]);
     });
 });

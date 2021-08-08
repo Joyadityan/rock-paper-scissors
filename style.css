@@ -37,11 +37,11 @@ h1 {
     gap: 1rem;
 }
 
-.keys {
+.buttons {
     flex-direction: row;
 }
 
-.key {
+.btn {
     background: #1c1c1d;
     width: 12rem;
     height: 12rem;
@@ -54,7 +54,7 @@ h1 {
     transition: 0.2s;
 }
 
-.key:hover {
+.btn:hover {
     box-shadow: 0 0 0.5rem rgb(97, 252, 252);
     transition: 0.2s;
 }
