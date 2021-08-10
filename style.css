@@ -47,7 +47,7 @@ h1 {
 
 .buttons {
     flex-direction: row;
-    height: 35%;
+    height: 32%;
     max-height: calc(80vw / 3.3);
 }
 
