@@ -44,7 +44,7 @@ function setImage(player, computer) {
 }
 
 function startGame(playerChoice) {
-    const roundUIContainer = document.querySelectorAll('.round-ui');
+    const circles = document.querySelectorAll('.circle');
     const currentRound = document.querySelector('#current-round');
     const playerImg = document.querySelectorAll('.player');
     const finalResult = document.querySelector('.final-result');
@@ -52,11 +52,11 @@ function startGame(playerChoice) {
     if (roundCount === 5) {
         roundCount = 1;
         score = [0, 0];
-        roundUIContainer.forEach((element) => {
-            element.style.backgroundColor = 'gray';
+        circles.forEach((circle) => {
+            circle.style.backgroundColor = 'gray';
         });
-        playerImg.forEach((element) => {
-            element.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+        playerImg.forEach((player) => {
+            player.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
         });
         finalResult.textContent = '';
     } else {
@@ -66,7 +66,7 @@ function startGame(playerChoice) {
     currentRound.textContent = `round ${roundCount}`;
 
     const gameLog = document.querySelector('.log');
-    const roundUI = document.querySelector(`#round-${roundCount}`);
+    const currentRoundCircle = document.querySelector(`#round-${roundCount}`);
     const scoreCounter = document.querySelectorAll(`.score`);
 
     playerChoice =
@@ -81,17 +81,17 @@ function startGame(playerChoice) {
         gameLog.textContent = `Tie! Both played ${playerChoice}.`;
         scoreCounter[0].textContent = score[0];
         scoreCounter[1].textContent = score[1];
-        roundUI.style.backgroundColor = '#f2f237';
+        currentRoundCircle.style.backgroundColor = '#f2f237';
     } else if (result === '1') {
         gameLog.textContent = `You win! ${playerChoice} beats ${computerChoice}.`;
         scoreCounter[0].textContent = ++score[0];
         scoreCounter[1].textContent = score[1];
-        roundUI.style.backgroundColor = '#47c847';
+        currentRoundCircle.style.backgroundColor = '#47c847';
     } else {
         gameLog.textContent = `You lose! ${computerChoice} beats ${playerChoice}.`;
         scoreCounter[0].textContent = score[0];
         scoreCounter[1].textContent = ++score[1];
-        roundUI.style.backgroundColor = '#a21d1d';
+        currentRoundCircle.style.backgroundColor = '#a21d1d';
     }
 
     if (roundCount === 5) {
